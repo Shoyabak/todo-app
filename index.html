@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional Todo App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell" aria-label="Todo application">
+    <section class="login-panel" id="login-panel">
+      <div class="login-card">
+        <p class="app-label">Secure access</p>
+        <h1 id="login-title">Sign in to Todo App</h1>
+        <p class="login-intro">Use a username and password to protect your tasks locally. New usernames are created automatically.</p>
+
+        <form id="login-form" class="login-form" aria-label="Sign in">
+          <label for="login-username">Username</label>
+          <input id="login-username" name="username" type="text" autocomplete="username" placeholder="Username" required minlength="3" />
+
+          <label for="login-password">Password</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Password" required minlength="4" />
+
+          <div class="login-action-group">
+            <button type="submit">Sign in</button>
+          </div>
+          <p class="login-message" id="login-message" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="app-panel hidden" id="todo-app">
+      <header class="app-header">
+        <div>
+          <p class="app-label">Task Manager</p>
+          <h1 id="app-title">Professional Todo App</h1>
+          <p class="app-user">Logged in as <strong id="user-name"></strong></p>
+        </div>
+
+        <div class="header-actions">
+          <button class="theme-toggle" type="button" aria-label="Toggle theme">🌙</button>
+          <button class="secondary-btn logout-btn" id="logout-button" type="button">Logout</button>
+        </div>
+      </header>
+
+      <div class="stats-dashboard">
+        <div class="stat-card">
+          <div class="stat-label">Total Tasks</div>
+          <div class="stat-value" id="stat-total">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completed</div>
+          <div class="stat-value" id="stat-completed">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pending</div>
+          <div class="stat-value" id="stat-pending">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completion %</div>
+          <div class="stat-value" id="stat-percentage">0%</div>
+        </div>
+      </div>
+
+      <form class="todo-form" id="todo-form" aria-label="Add new todo">
+        <label class="visually-hidden" for="todo-input">New task</label>
+        <input
+          id="todo-input"
+          name="task"
+          type="text"
+          autocomplete="off"
+          placeholder="Add a new task..."
+          required
+          maxlength="100"
+        />
+        <div class="form-row">
+          <label for="category-select">Category</label>
+          <select id="category-select" name="category">
+            <option value="work">Work</option>
+            <option value="study">Study</option>
+            <option value="personal">Personal</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="due-date">Due date (optional)</label>
+          <input id="due-date" name="dueDate" type="date" />
+        </div>
+        <div class="form-row">
+          <label class="checkbox-label">
+            <input id="reminder" name="reminder" type="checkbox" />
+            Set reminder
+          </label>
+        </div>
+        <button type="submit">Add task</button>
+      </form>
+
+      <div class="controls">
+        <div class="status-summary" aria-live="polite"></div>
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button class="filter-btn active" data-filter="all" type="button">All</button>
+          <button class="filter-btn" data-filter="active" type="button">Active</button>
+          <button class="filter-btn" data-filter="completed" type="button">Completed</button>
+        </div>
+      </div>
+
+      <div class="category-filters" role="group" aria-label="Filter by category">
+        <button class="category-filter-btn active" data-category="" type="button">All Categories</button>
+        <button class="category-filter-btn" data-category="work" type="button">Work</button>
+        <button class="category-filter-btn" data-category="study" type="button">Study</button>
+        <button class="category-filter-btn" data-category="personal" type="button">Personal</button>
+      </div>
+
+      <div class="search-container">
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search tasks..."
+          autocomplete="off"
+          aria-label="Search tasks"
+        />
+      </div>
+
+      <ul class="todo-list" id="todo-list" aria-live="polite"></ul>
+
+      <div class="footer-actions">
+        <button class="secondary-btn" id="clear-completed" type="button">Clear completed</button>
+        <button class="secondary-btn" id="export-tasks" type="button">Export tasks</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Browser notification permission request
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission();
+    }
+  </script>
+  <script src="script.js" defer></script>
+</body>
+</html>
